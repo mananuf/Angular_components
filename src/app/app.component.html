@@ -24,35 +24,19 @@
       and capital that can unlock long-term value and drive economic growth.
       </p>
   </div>
-  
-  <div class="container flex items-center max-w-md my-5 mx-3 space-x-3" *ngIf="query">
+  <div class="container m-3 max-w-md ">
+    <input type="text" class="border-2 w-full rounded-md p-1" [(ngModel)]="query" placeholder="search artiste">
+  </div>
+
+  <div class="container flex items-center max-w-md mt-2 mx-3 space-x-3" *ngIf="query">
    <strong>Info About: </strong> <span class="text-green-400  text-lg"> {{ query }} </span>
   </div>
-  <ul class="max-w-md divide-gray-200 dark:divide-gray-700 mt-10 space-y-3">
+  <ul class="max-w-md divide-gray-200 dark:divide-gray-700 mt-5 mx-3 space-y-3">
     <li class="p-3 bg-slate-100 rounded-sm cursor-pointer" 
-      *ngFor="let artiste of artistes"
+      *ngFor="let artiste of (artistes | searchArtiste: query)"
       (click) = "showArtiste(artiste)"
     >
-       <div class="flex items-center space-x-4">
-          <div class="flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            
-             <!-- <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image"> -->
-          </div>
-          <div class="flex-1 min-w-0">
-             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                {{ artiste.name }}
-             </p>
-             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                {{ artiste.gender }}
-             </p>
-          </div>
-          <!-- <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-             $320
-          </div> -->
-       </div>
+       <app-artiste-item [artiste]="artiste"></app-artiste-item>
     </li>
   </ul>
 </div>
